@@ -1,2 +1,2 @@
 # docker-library
-Docker Library
+A collection of DockerFiles and Utilities
