@@ -16,7 +16,6 @@
 #
 #cluster.name: my-application
 #
-cluster.name: "elk"
 # ------------------------------------ Node ------------------------------------
 #
 # Use a descriptive name for the node:
@@ -31,14 +30,12 @@ cluster.name: "elk"
 #
 # Path to directory where to store the data (separate multiple locations by comma):
 #
-# path.data: /path/to/data
+#path.data: /path/to/data
 #
-# path.data: /data/elasticsearch/data
 # Path to log files:
 #
-# path.logs: /path/to/logs
+#path.logs: /path/to/logs
 #
-# path.logs: /data/elasticsearch/logs
 # ----------------------------------- Memory -----------------------------------
 #
 # Lock the memory on startup:
@@ -59,32 +56,34 @@ cluster.name: "elk"
 #
 # Set a custom port for HTTP:
 #
-http.port: 9200
+#http.port: 9200
 #
 # For more information, consult the network module documentation.
-# <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html>
 #
-network.host: 0.0.0.0
 # --------------------------------- Discovery ----------------------------------
 #
 # Pass an initial list of hosts to perform discovery when new node is started:
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 #
+network.host: 0.0.0.0
+#
 #discovery.zen.ping.unicast.hosts: ["host1", "host2"]
 #
 # Prevent the "split brain" by configuring the majority of nodes (total number of master-eligible nodes / 2 + 1):
 #
-#discovery.zen.minimum_master_nodes: 3
+#discovery.zen.minimum_master_nodes: 
+#
+# this value is required because we set "network.host"
+# be sure to modify it appropriately for a production cluster deployment
+discovery.zen.minimum_master_nodes: 1
+# bootstrap.memory_lock: true
+#
+node.master: true
+node.ingest: true
+node.data: true
 #
 # For more information, consult the zen discovery module documentation.
 #
-# <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery.html>
-#
-# minimum_master_nodes need to be explicitly set when bound on a public IP
-# set to 1 to allow single node clusters
-# Details: https://github.com/elastic/elasticsearch/pull/17288
-#
-discovery.zen.minimum_master_nodes: 1
 # ---------------------------------- Gateway -----------------------------------
 #
 # Block initial recovery after a full cluster restart until N nodes are started:
@@ -92,34 +91,7 @@ discovery.zen.minimum_master_nodes: 1
 #gateway.recover_after_nodes: 3
 #
 # For more information, consult the gateway module documentation.
-# <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-gateway.html>
 #
-# ---------------------------------- Index -----------------------------------
-# You can set a number of options (such as shard/replica options, mapping
-# or analyzer definitions, translog settings, ...) for indices globally,
-# in this file.
-#
-# Since elasticsearch 5.x index level settings can NOT be set on the nodes 
-# configuration like the elasticsearch.yaml, in system properties or command line 
-# arguments.In order to upgrade all indices the settings must be updated via the 
-# /${index}/_settings API. Unless all settings are dynamic all indices must be closed 
-# in order to apply the upgradeIndices created in the future should use index templates 
-# to set default values. 
-#
-# Please ensure all required values are updated on all indices by executing: 
-#
-# curl -XPUT 'http://localhost:9200/_all/_settings?preserve_existing=true' -d '{
-#  "index.number_of_replicas" : "0",
-#  "index.number_of_shards" : "1"
-# }'
-# in Dev Tools
-# PUT /_all/_settings
-# {
-#     "index" : {
-#        "number_of_replicas" : 0
-#    }
-# }
-
 # ---------------------------------- Various -----------------------------------
 #
 # Require explicit names when deleting indices:
