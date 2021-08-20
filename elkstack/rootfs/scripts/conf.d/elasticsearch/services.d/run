@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bash
+
+# reset permission after docker volume remount
+chown -R elasticsearch:elasticsearch /usr/share/elasticsearch
+
+exec \
+    s6-setuidgid elasticsearch \
+    /usr/share/elasticsearch/bin/elasticsearch "$@"

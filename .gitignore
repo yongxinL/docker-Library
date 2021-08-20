@@ -1,35 +1,71 @@
-!Build/
-.last_cover_stats
-/META.yml
-/META.json
-/MYMETA.*
-*.o
-*.pm.tdy
-*.bs
+## Update identity (in Command line/Terminal):
+# git config --global user.name "yongxinL"
+# git config --global user.email "yongxinL@outlook.com"
 
-# Devel::Cover
-cover_db/
+# git-deploy status file:
+/.deploy
 
-# Devel::NYTProf
-nytprof.out
+# Editors
+*.kate-swp
+*~
+\#*#
+.#*
+.*.swp
+.project
+cscope.files
+cscope.out
+## NetBeans
+nbproject*
+project.index
+## Sublime
+sublime-*
+sftp-config.json
 
-# Dizt::Zilla
-/.build/
+# Building & testing
+/composer.lock
+/docs
+/node_modules
+/vendor
 
-# Module::Build
-_build/
-Build
-Build.bat
+# Operating systems
+## Mac OS X
+.DS_Store
+## Windows
+Thumbs.db
 
-# Module::Install
-inc/
+# Misc
+.buildpath
+.classpath
+.idea
+.metadata*
+.settings
+/static*
+/tags
+/.htaccess
+/.htpasswd
+.eslintcache
 
-# ExtUtils::MakeMaker
-/blib/
-/_eumm/
-/*.gz
-/Makefile
-/Makefile.old
-/MANIFEST.bak
-/pm_to_blib
-/*.zip
+# ignore log files and databases
+*.log
+*.sql
+*.sqlite
+
+# clone to Library
+.storybook
+dev-scripts
+stories
+tests
+.eslintignore
+.eslintrc.json
+.gitreview
+.phpcs
+.stylelintignore
+.stylelintrc.json
+.svgo.yml
+Doxyfile
+jsdoc.json
+tsconfig.json
+
+# ignore everything related to Visual Studio Code
+.vscode/*
+*.code-workspace

@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bash
+
+# reset permission after docker volume remount
+chown -R kibana:kibana /usr/share/kibana
+
+exec \
+    s6-setuidgid kibana \
+    /usr/share/kibana/bin/kibana

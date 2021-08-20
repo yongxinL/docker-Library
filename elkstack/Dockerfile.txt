@@ -1,0 +1,33 @@
+# =============================================================================
+#
+# - Copyright (C) 2021     George Li <yongxinl@outlook.com>
+#
+# - This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+# =============================================================================
+
+FROM _===BASE_PLATFORM===_
+LABEL maintainer "https://github.com/yongxinL/docker-library"
+
+# upload scripts to container unit
+COPY rootfs /
+
+# execute scripts to build
+RUN set -e; \
+    chmod +x /scripts/*.sh; \
+    sync; \
+    for sfile in $(ls /scripts/[0-9]*.sh); do \
+        echo "executing script $sfile ..."; \
+        $sfile; \
+    done;
+
+# ports exposed to host
+EXPOSE _===EXPOSE_PORTS===_
+
+# mount point from native host or other containers
+VOLUME [_===EXPOSE_VOLUME===_]
+
+# define default command
+CMD [ "/init" ]
